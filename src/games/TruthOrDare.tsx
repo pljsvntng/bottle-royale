@@ -1,3 +1,4 @@
+import RandomPick from './RandomPick'
 import { useRef, useState } from 'react'
 import type { Player } from '../App'
 import { truths, dares, pick } from '../data/prompts'
@@ -12,6 +13,7 @@ export default function TruthOrDare({ players }: { players: Player[] }) {
     <div className="grid gap-4 md:grid-cols-2">
       <div className="card space-y-3">
         <p>Current player: <b className="text-[#c9a24b]">{p.name}</b></p>
+        {prompt === null && <RandomPick players={players} onPick={i => setTurn(i)} />}
         {prompt === null ? <div className="flex gap-2">
           <button className="btn" onClick={() => setPrompt('Truth: ' + pick(truths, ut.current))}>Truth</button>
           <button className="btn" onClick={() => setPrompt('Dare: ' + pick(dares, ud.current))}>Dare</button></div>

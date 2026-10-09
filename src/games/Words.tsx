@@ -1,3 +1,4 @@
+import RandomPick from './RandomPick'
 import { useEffect, useState } from 'react'
 import type { Player } from '../App'
 import { WORDS } from '../data/content'
@@ -12,7 +13,7 @@ export default function Words({ players, mode }: { players: Player[]; mode: 'cha
   const reset = () => { setRun(false); setPh('idle'); setShow(false) }
   const mark = (ok: boolean) => { setLog([...log, [w, ok]]); if (ok) setSc({ ...sc, [p.id]: (sc[p.id] || 0) + 1 }); setI(i + 1); setShow(false); setHint(false) }
   return <div className="grid gap-4 md:grid-cols-2"><div className="card space-y-3"><p>{mode === 'charades' ? 'Act it out — no talking!' : 'Describe it without saying the word.'} Player: <b className="text-[#c9a24b]">{p.name}</b></p>
-    {ph === 'idle' && <><div className="flex flex-wrap gap-2">{Object.keys(WORDS).map(c => <button key={c} className={c === cat ? 'btn' : 'btn2'} onClick={() => setCat(c)}>{c}</button>)}</div>
+    {ph === 'idle' && <><RandomPick players={players} onPick={setTurn} /><div className="flex flex-wrap gap-2">{Object.keys(WORDS).map(c => <button key={c} className={c === cat ? 'btn' : 'btn2'} onClick={() => setCat(c)}>{c}</button>)}</div>
       <label>Seconds <select className="bg-black border border-neutral-700 rounded" value={dur} onChange={e => setDur(+e.target.value)}>{[30, 60, 90].map(s => <option key={s}>{s}</option>)}</select></label><button className="btn w-full" onClick={start}>Start</button></>}
     {ph === 'play' && <><p className="text-3xl font-bold" role="timer">{t}s</p><p className="text-2xl min-h-9">{show ? w : '••••••'}</p>
       <div className="flex flex-wrap gap-2"><button className="btn2" onClick={() => setShow(!show)}>{show ? 'Hide word' : 'Show word (player only)'}</button>

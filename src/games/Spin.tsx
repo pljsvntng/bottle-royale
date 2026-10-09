@@ -4,7 +4,7 @@ import { CHALLENGES, pick } from '../data/prompts'
 import { sfx } from './sound'
 import { useLS } from './ui'
 
-const DEFAULT_PENALTY = 'Challenge skipped! You chose to pass! Your penalty is 2 shots.'
+const DEFAULT_PENALTY = 'Challenge skipped! Choose a non-alcoholic penalty, such as drinking a glass of water, answering a bonus question, or accepting a funny harmless challenge.'
 const CATS = Object.keys(CHALLENGES)
 type Phase = 'idle' | 'spinning' | 'reveal' | 'wheel' | 'wheelspin' | 'challenge' | 'confirm' | 'result'
 const Modal = ({ children }: { children: ReactNode }) => <div role="dialog" aria-modal="true" className="fixed inset-0 z-20 grid place-items-center bg-black/70 p-4 overflow-auto"><div className="pop card max-w-md w-full text-center space-y-3 !border-[#c9a24b]">{children}</div></div>
@@ -48,7 +48,7 @@ export default function Spin({ players }: { players: Player[] }) {
       <div className="relative mx-auto w-full max-w-sm aspect-square">
         {players.map((p, i) => { const a = (i * 2 * Math.PI) / n
           return <div key={p.id} className="absolute -translate-x-1/2 -translate-y-1/2 text-center text-xs" style={{ left: `${50 + 39 * Math.sin(a)}%`, top: `${50 - 39 * Math.cos(a)}%` }}>
-            <div className={`w-8 h-8 sm:w-10 sm:h-10 text-sm rounded-full grid place-items-center font-bold border-2 ${sel?.id === p.id ? 'border-[#c9a24b] scale-125' : 'border-transparent'}`} style={{ background: p.color }}>{p.name[0].toUpperCase()}</div><span className="block max-w-18 truncate mx-auto">{p.name}</span></div> })}
+            <div className={`w-8 h-8 sm:w-10 sm:h-10 text-sm rounded-full grid place-items-center font-bold border-2 ${sel?.id === p.id ? 'border-[#c9a24b] scale-125' : 'border-transparent'}`} style={{ background: p.color }}>{p.name[0].toUpperCase()}</div><span className="block max-w-[4.5rem] truncate mx-auto">{p.name}</span></div> })}
         <svg viewBox="0 0 60 200" className="absolute inset-0 m-auto h-3/5" aria-label="Bottle" style={{ transform: `rotate(${rot}deg)`, transition: ph === 'spinning' ? 'transform 4s cubic-bezier(.15,.7,.1,1)' : 'none' }} onTransitionEnd={bottleDone}>
           <rect x="22" y="2" width="16" height="12" rx="2" fill="#c9a24b" />
           <path d="M23 14h14v40c0 10 18 18 18 40v90c0 6-4 10-10 10H15c-6 0-10-4-10-10V94c0-22 18-30 18-40z" fill="#1c2a22" stroke="#3a4a40" />
