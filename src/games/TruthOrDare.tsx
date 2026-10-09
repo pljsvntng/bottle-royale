@@ -12,7 +12,7 @@ export default function TruthOrDare({ players }: { players: Player[] }) {
   return (
     <div className="grid gap-4 md:grid-cols-2">
       <div className="card space-y-3">
-        <p>Current player: <b className="text-[#c9a24b]">{p.name}</b></p>
+        <p>Current player: <b className="text-[#C23B30]">{p.name}</b></p>
         {prompt === null && <RandomPick players={players} onPick={i => setTurn(i)} />}
         {prompt === null ? <div className="flex gap-2">
           <button className="btn" onClick={() => setPrompt('Truth: ' + pick(truths, ut.current))}>Truth</button>

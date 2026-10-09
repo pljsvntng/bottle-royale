@@ -12,9 +12,9 @@ export default function Quiz({ players }: { players: Player[] }) {
   if (qi >= qs.length) return <div className="space-y-3"><Board players={players} scores={sc} /><button className="btn" onClick={() => setQs(null)}>Play again</button></div>
   const q = qs[qi], rev = ans.length >= players.length
   const pick = (o: number) => { const a = [...ans, o]; setAns(a); if (a.length === players.length) { const s = { ...sc }; players.forEach((_, k) => { if (a[k] === q.a) { const pl = players[(first + k) % players.length]; s[pl.id] = (s[pl.id] || 0) + 1 } }); setSc(s) } }
-  return <div className="grid gap-4 md:grid-cols-2"><div className="card space-y-2"><p className="text-sm text-neutral-400">{q.c} · {qi + 1}/{qs.length}</p><p className="text-lg">{q.q}</p>
+  return <div className="grid gap-4 md:grid-cols-2"><div className="card space-y-2"><p className="text-sm text-[#6B5A73]">{q.c} · {qi + 1}/{qs.length}</p><p className="text-lg">{q.q}</p>
     {!rev && ans.length === 0 && <RandomPick players={players} onPick={setFirst} />}
-    {!rev && <p>Answering: <b className="text-[#c9a24b]">{players[(first + ans.length) % players.length].name}</b></p>}
+    {!rev && <p>Answering: <b className="text-[#C23B30]">{players[(first + ans.length) % players.length].name}</b></p>}
     {q.o.map((o, k) => <button key={k} className={rev && k === q.a ? 'btn w-full text-left' : 'btn2 w-full text-left'} disabled={rev} onClick={() => pick(k)}>{o}</button>)}
     {rev && <><p>Correct: {q.o[q.a]}</p><button className="btn" onClick={() => { setQi(qi + 1); setAns([]) }}>{qi + 1 < qs.length ? 'Next' : 'Finish'}</button></>}</div><Board players={players} scores={sc} /></div>
 }

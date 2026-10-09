@@ -15,6 +15,6 @@ export default function Custom({ players }: { players: Player[] }) {
     <input aria-label="Game title" className="w-full bg-black border border-neutral-700 rounded px-3 py-2" placeholder="Title" value={t} onChange={e => setT(e.target.value)} />
     <textarea aria-label="Prompts" rows={5} className="w-full bg-black border border-neutral-700 rounded px-3 py-2" placeholder="One prompt per line" value={p} onChange={e => setP(e.target.value)} />
     {err && <p role="alert" className="text-red-400 text-sm">{err}</p>}<button className="btn" onClick={save}>Save game</button></div>
-    <div className="card space-y-2"><h3 className="font-semibold">Saved games</h3>{!list.length && <p className="text-neutral-400">None yet.</p>}
+    <div className="card space-y-2"><h3 className="font-semibold">Saved games</h3>{!list.length && <p className="text-[#6B5A73]">None yet.</p>}
       {list.map(g => <div key={g.id} className="flex items-center gap-2"><span className="flex-1">{g.title} ({g.prompts.length})</span><button className="btn" onClick={() => setPlay(g)}>Play</button><button className="btn2" onClick={() => setList(list.filter(x => x.id !== g.id))}>Delete</button></div>)}</div></div>
 }
